@@ -8,7 +8,7 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxLength: 20,
+      maxLength: 255,
       minLength: 3,
     },
     price: {
@@ -20,7 +20,7 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      maxLength: 50,
+      maxLength: 255,
       minLength: 2,
     },
     image: {
@@ -33,9 +33,9 @@ const ProductSchema = new Schema(
 
 ProductSchema.methods.joiValidation = function (productObject) {
   const productSchema = Joi.object({
-    name: Joi.string().min(3).max(20).trim().required(),
+    name: Joi.string().min(3).max(255).trim().required(),
     price: Joi.number(),
-    description: Joi.string().min(3).max(50).trim().required(),
+    description: Joi.string().min(3).max(255).trim().required(),
     image: Joi.string().trim(),
   });
   return productSchema.validate(productObject);
