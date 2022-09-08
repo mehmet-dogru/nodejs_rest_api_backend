@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+//Error Handling
+const errorMiddleware = require("./middleware/errorMiddleware");
+
 require("dotenv").config();
 require("./config/database");
 
@@ -15,6 +18,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/products", productRouter);
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`SERVER ${process.env.PORT} portunda çalışıyor...`);

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Joi = require("@hapi/joi");
 
 const ProductSchema = new Schema(
   {
@@ -7,6 +8,8 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
       trim: true,
+      maxLength: 20,
+      minLength: 3,
     },
     price: {
       type: Number,
@@ -18,6 +21,7 @@ const ProductSchema = new Schema(
       required: true,
       trim: true,
       maxLength: 50,
+      minLength: 2,
     },
     image: {
       type: String,
@@ -26,6 +30,27 @@ const ProductSchema = new Schema(
   },
   { collection: "Product", timestamps: true }
 );
+
+ProductSchema.methods.joiValidation = function (productObject) {
+  const productSchema = Joi.object({
+    name: Joi.string().min(3).max(20).trim().required(),
+    price: Joi.number(),
+    description: Joi.string().min(3).max(50).trim().required(),
+    image: Joi.string().trim(),
+  });
+  return productSchema.validate(productObject);
+};
+
+// ProductSchema.methods.joiValidationForUpdate = function (productObject) {
+//   const productSchema = Joi.object({
+//     name: Joi.string().min(3).max(20).trim(),
+//     price: Joi.number(),
+//     description: Joi.string().min(3).max(50).trim(),
+//     image: Joi.string().trim(),
+//   });
+//   console.log("kjdgl");
+//   return productSchema.validate(productObject);
+// };
 
 const Product = mongoose.model("Product", ProductSchema);
 
