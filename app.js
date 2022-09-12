@@ -10,15 +10,19 @@ require("./config/database");
 const productRouter = require("./routers/product_router");
 
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-}));
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 app.get("/", (req, res) => {
   res.json({
     message: "NodeJS Flutter RestAPI",
   });
 });
+
+app.use("/upload", express.static(__dirname + "/uploads/images"));
 
 app.use("/products", productRouter);
 

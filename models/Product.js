@@ -26,6 +26,8 @@ const ProductSchema = new Schema(
     image: {
       type: String,
       trim: true,
+      default:
+        "https://hotelbeyt.com/wp-content/uploads/woocommerce-placeholder.png",
     },
   },
   { collection: "Product", timestamps: true }
@@ -34,7 +36,7 @@ const ProductSchema = new Schema(
 ProductSchema.methods.joiValidation = function (productObject) {
   const productSchema = Joi.object({
     name: Joi.string().min(3).max(255).trim().required(),
-    price: Joi.number(),
+    price: Joi.number().required(),
     description: Joi.string().min(3).max(255).trim().required(),
     image: Joi.string().trim(),
   });
