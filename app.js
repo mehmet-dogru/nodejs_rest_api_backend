@@ -8,6 +8,7 @@ require("dotenv").config();
 require("./config/database");
 
 const productRouter = require("./routers/product_router");
+const userRouter = require("./routers/user_router");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
 app.use("/upload", express.static(__dirname + "/uploads/images"));
 
 app.use("/products", productRouter);
+app.use("/api/users", userRouter);
 
 app.use(errorMiddleware);
 

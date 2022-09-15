@@ -43,17 +43,6 @@ ProductSchema.methods.joiValidation = function (productObject) {
   return productSchema.validate(productObject);
 };
 
-// ProductSchema.methods.joiValidationForUpdate = function (productObject) {
-//   const productSchema = Joi.object({
-//     name: Joi.string().min(3).max(20).trim(),
-//     price: Joi.number(),
-//     description: Joi.string().min(3).max(50).trim(),
-//     image: Joi.string().trim(),
-//   });
-//   console.log("kjdgl");
-//   return productSchema.validate(productObject);
-// };
-
 const Product = mongoose.model("Product", ProductSchema);
 
 module.exports = Product;
