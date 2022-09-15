@@ -8,7 +8,7 @@ const getUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-    res.json(req.user);
+  res.json(req.user);
 };
 
 const addUser = async (req, res, next) => {
@@ -55,7 +55,7 @@ const updateUser = async (req, res, next) => {
   }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     if (deletedUser) {
@@ -75,7 +75,10 @@ const loginProccess = async (req, res, next) => {
   try {
     const user = await User.login(req.body.email, req.body.password);
     const token = await user.generateToken();
-    res.json({ user: user, token: token });
+    res.json({ user: user, token: token, success: true });
+    if (!user) {
+      res.json({ success: false });
+    }
   } catch (error) {
     next(error);
   }

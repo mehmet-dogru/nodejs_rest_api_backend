@@ -48,6 +48,7 @@ UserSchema.statics.login = async (email, password) => {
   if (!user) {
     throw createError(400, "Girilen email veya şifre hatalı");
   }
+
   const checkPassword = await bcrypt.compare(password, user.password);
 
   if (!checkPassword) {
