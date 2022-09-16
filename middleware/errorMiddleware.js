@@ -1,8 +1,8 @@
 const errorHandling = (err, req, res, next) => {
   if (err.code === 11000) {
     return res.json({
-      message: "Unique value",
-      statusCode: err.statusCode,
+      message: "Bu kullanıcı zaten var",
+      statusCode: 403,
     });
   }
 
@@ -16,7 +16,7 @@ const errorHandling = (err, req, res, next) => {
   res.json({
     statusCode: err.statusCode || 500,
     message: err.message,
-    success : false,
+    success: false,
   });
 };
 
