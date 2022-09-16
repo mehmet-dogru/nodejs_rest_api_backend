@@ -76,9 +76,6 @@ const loginProccess = async (req, res, next) => {
     const user = await User.login(req.body.email, req.body.password);
     const token = await user.generateToken();
     res.json({ user: user, token: token, success: true });
-    if (!user) {
-      res.json({ success: false });
-    }
   } catch (error) {
     next(error);
   }
