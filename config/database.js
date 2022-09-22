@@ -5,6 +5,7 @@ mongoose
   .then(() => {
     console.log("Veri Tabanına Bağlandı :)");
   })
-  .catch(() => {
+  .catch((err) => {
+    console.log(err);
     console.log("Veri Tabanına Bağlanırken Hata Oluştu :(");
   });
